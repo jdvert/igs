@@ -5,17 +5,23 @@ namespace IgsMarket.Api
 {
     internal class IgsMarketDbContext : DbContext
     {
+        private readonly bool _seedData;
+
         public DbSet<Product> Products { get; set; }
 
-        public IgsMarketDbContext(DbContextOptions<IgsMarketDbContext> options)
+        public IgsMarketDbContext(DbContextOptions<IgsMarketDbContext> options, bool seedData = true)
         : base(options)
         {
+            _seedData = seedData;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>()
-                .HasData(SeedData.Products);
+            if (_seedData)
+            {
+                modelBuilder.Entity<Product>()
+                    .HasData(SeedData.Products);
+            }
 
             modelBuilder.Entity<Product>()
                 .Property(p => p.Name)
