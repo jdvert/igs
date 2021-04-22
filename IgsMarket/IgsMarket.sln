@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IgsMarket.Api", "IgsMarket.Api\IgsMarket.Api.csproj", "{3ACBF755-9EFD-46E6-B95E-CBD30D600544}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E5747F8D-85D6-4F56-A149-53A1F3D8C506}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3ACBF755-9EFD-46E6-B95E-CBD30D600544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ACBF755-9EFD-46E6-B95E-CBD30D600544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ACBF755-9EFD-46E6-B95E-CBD30D600544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5747F8D-85D6-4F56-A149-53A1F3D8C506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5747F8D-85D6-4F56-A149-53A1F3D8C506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5747F8D-85D6-4F56-A149-53A1F3D8C506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5747F8D-85D6-4F56-A149-53A1F3D8C506}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

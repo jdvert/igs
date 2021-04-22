@@ -1,16 +1,15 @@
+using IgsMarket.Api.Services;
+using IgsMarket.Api.Setup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace IgsMarket.Api
 {
@@ -23,18 +22,33 @@ namespace IgsMarket.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(logging => logging.AddConsole());
 
-            services.AddControllers();
+            services.AddDbContext<IgsMarketDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("IGS")));
+
+            services.AddScoped<IProductRepository, EFProductRepository>();
+
+            services
+                .AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
+                });
+
+            services.AddApiVersioning(Configuration =>
+            {
+                Configuration.DefaultApiVersion = new ApiVersion(1, 0);
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IgsMarket", Version = "v1" });
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -54,6 +68,8 @@ namespace IgsMarket.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.MigrateDatabaseOnStartup(dropBeforeMigration: true);
         }
     }
 }
