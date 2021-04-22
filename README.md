@@ -11,7 +11,7 @@ By default the application will drop and recreate it's database each time it is 
 
 ## Usage
 1. Clone the repository to your local PC.
-2. Open the IgsMarket solution file (IgsMarket.sln) in Visual Studio.
+2. Open the IgsMarket solution file (IgsMarket/IgsMarket.sln) in Visual Studio.
 3. Ensure that the `docker-compose` project is set as the startup project.
 4. Run the application from Visual Studio. This will open a web browser with the Swagger definition for the API.
 5. You can now call the API or run tests against it using Postman.
