@@ -21,6 +21,8 @@ namespace IgsMarket.Api.Services
         {
             await _dbContext.AddAsync(product);
             await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation($"Created new {nameof(Product)} with ID {product.Id}.");
             return product;
         }
 
@@ -28,6 +30,8 @@ namespace IgsMarket.Api.Services
         {
             _dbContext.Remove(product);
             await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation($"Deleted {nameof(Product)} with ID {product.Id}.");
         }
 
         public async Task<IEnumerable<Product>> GetAllProducts()
@@ -44,6 +48,8 @@ namespace IgsMarket.Api.Services
         {
             _dbContext.Update(product);
             await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation($"Updated {nameof(Product)} with ID {product.Id}.");
             return product;
         }
     }
